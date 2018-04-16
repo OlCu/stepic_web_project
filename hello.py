@@ -1,5 +1,6 @@
-def app(environ, start_response):
-        data = "\n".join(environ.get('QUERY_STRING').split("&"))
-        start_response("200 OK", [("Content-Type", "text/plain")])
-        return data
-#iter([data])
+def app(environ, start_response):                                                                 
+    resp = environ['QUERY_STRING'].split('&')                                   
+    resp = [item.encode('utf-8')+b'\r\n' for item in resp]                      
+    start_response("200 OK", [("Content-Type", "text/plain")])                  
+    return resp                                                                 
+                                             
